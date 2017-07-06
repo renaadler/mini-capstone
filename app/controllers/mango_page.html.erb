@@ -4,9 +4,9 @@ class ProductsController < ApplicationController
     render "products_page.html.erb"
   end
 
-  def mango_product_method
+  def one_product_method
     @product = Product.first
-    render "mango_page.html.erb"
+    render "product_one_page.html.erb"
   end
 
 end
