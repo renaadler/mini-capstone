@@ -6,8 +6,10 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.first
-    render "mango.html.erb"
+    product_id = params["id"]
+
+    @product = Product.find_by(id: product_id)
+    render "show.html.erb"
   end
 
 end
