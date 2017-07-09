@@ -1,12 +1,13 @@
 class ProductsController < ApplicationController
-  def products_method
+  
+  def index
     @products = Product.all
-    render "products_page.html.erb"
+    render "index.html.erb"
   end
 
-  def mango_product_method
+  def show
     @product = Product.first
-    render "mango_page.html.erb"
+    render "mango.html.erb"
   end
 
 end
