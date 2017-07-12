@@ -2,4 +2,8 @@
   <p><%= @product.price %></p>
   <p> <img src="<%= @product.image%>"/></p>
   <p><%= @product.description %></p>
+<a href="/products/<%= @product.id %>/edit">Edit this Smoothie</a>
+<%= form_tag "/products/#{@product.id}", method: "delete" do %>
+<input type="submit" value="Delete Smoothie">
+<% end %>
 <a href="/products">Back to All Products</a>

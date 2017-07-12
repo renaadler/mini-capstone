@@ -2,16 +2,16 @@
 
 <%= form_tag "/products", method: "post" do %>
 <div class="form-group">
-  Name: <input type="text" name="form_name">
+  Name: <input type="text" class="form-control" name="form_name">
 </div>
 <div class="form-group">
-  Price: <input type="float" name="form_price">
+  Price: <input type="float" class="form-control" name="form_price">
 </div>
 <div class="form-group">
-  Image: <input type="text" name="form_image">
+  Image: <input type="text" class="form-control" name="form_image">
 </div>
 <div class="form-group">
-  Description: <input type="text" name="form_description">
+  Description: <input type="text" class="form-control" name="form_description">
 </div>
 <input type="submit" value="Create New Smoothie">
   <% end %>

@@ -1,5 +1,4 @@
 class ProductsController < ApplicationController
-  
   def index
     @products = Product.all
     render "index.html.erb"
@@ -17,13 +16,39 @@ class ProductsController < ApplicationController
       description: params[:form_description]
       )
     product.save
-    render "create.html.erb"
+    flash[:success] = "Smoothie Successfully Created!"
+    redirect_to "/products/#{product.id}"
   end
+
   def show
     product_id = params["id"]
-
     @product = Product.find_by(id: product_id)
     render "show.html.erb"
   end
 
+  def edit
+    product_id = params[:id]
+    @product = Product.find_by(id: product_id)
+    render "edit.html.erb"
+  end
+
+  def update
+    product_id = params[:id]
+    @product = Product.find_by(id: product_id)
+    @product.name = params[:form_name]
+    @product.price = params[:form_price]
+    @product.image = params[:form_image]
+    @product.description = params[:form_description]
+    @product.save
+    flash[:success] = "Smoothie Successfully Updated!"
+    redirect_to "/products/#{@product.id}"
+  end
+
+  def destroy
+    product_id = params[:id]
+    @product = Product.find_by(id: product_id)
+    @product.destroy
+    flash[:danger] = "Smoothie Successfully Deleted!"
+    redirect_to "/products"
+  end
 end
