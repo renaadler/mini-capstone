@@ -13,7 +13,8 @@ class ProductsController < ApplicationController
       name: params[:form_name],
       price: params[:form_price],
       image: params[:form_image],
-      description: params[:form_description]
+      description: params[:form_description],
+      stock: params[:true]
       )
     product.save
     flash[:success] = "Smoothie Successfully Created!"
@@ -39,6 +40,8 @@ class ProductsController < ApplicationController
     @product.price = params[:form_price]
     @product.image = params[:form_image]
     @product.description = params[:form_description]
+    @product.stock = params[:form_stock]
+
     @product.save
     flash[:success] = "Smoothie Successfully Updated!"
     redirect_to "/products/#{@product.id}"

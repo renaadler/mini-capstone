@@ -14,4 +14,12 @@ class Product < ApplicationRecord
   def total
     price + tax
   end
+
+  def sales_method_class_name
+    if sales_method == "Discount Item!"
+      return "discount-item"
+    else
+      return ""
+    end
+  end
 end

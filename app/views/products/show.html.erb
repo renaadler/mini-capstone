@@ -1,7 +1,7 @@
      <div class="col-md-3"></div>
     <div class="well">
    <h2><%= @product.name %></h2>
-  <p><%= @product.sales_method %></p>
+  <p class="<%= @product.sales_method_class_name %>"><%= @product.sales_method %></p>
   <p>Price: <%= number_to_currency(@product.price) %></p>
   <p>Tax: <%= number_to_currency(@product.tax) %></p>
   <p>Total: <%= number_to_currency(@product.total) %></p>
