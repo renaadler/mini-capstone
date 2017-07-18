@@ -5,12 +5,14 @@ class ProductsController < ApplicationController
     sort_order = params[:sort_order]
     discount = params[:discount]
     
-    if sort_attributes
-      @products = Product.all.order(sort_attributes => sort_order)
-    elsif discount 
+    if discount 
       @products = Product.where("price < ?", 6)
     else  
       @products = Product.all
+    end
+
+    if sort_attributes
+      @products = Product.all.order(sort_attributes => sort_order)
     end
     render "index.html.erb"
   end
