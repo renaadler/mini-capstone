@@ -1,18 +1,20 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
     sort_attributes = params[:sort_by]
     sort_order = params[:sort_order]
     discount = params[:discount]
+    search_terms = params[:search_terms]
     
     if discount 
       @products = Product.where("price < ?", 6)
+    elsif search_terms
+      @products = Product.where("name iLIKE ?", "%" + search_terms + "%")
     else  
       @products = Product.all
     end
 
     if sort_attributes
-      @products = Product.all.order(sort_attributes => sort_order)
+      @products = @products.order(sort_attributes => sort_order)
     end
     render "index.html.erb"
   end
