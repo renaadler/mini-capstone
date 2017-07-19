@@ -7,6 +7,7 @@
   <p>Total: <%= number_to_currency(@product.total) %></p>
   <p> <img src="<%= @product.image%>" width: "100%"/></p>
   <p><%= @product.description %></p>
+  <p>Supplied By: <%= @product.supplier.name %></p>
 <a href="/products/<%= @product.id %>/edit">Edit this Smoothie</a>
 <%= form_tag "/products/#{@product.id}", method: "delete" do %>
 <input type="submit" value="Delete Smoothie">
