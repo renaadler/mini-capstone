@@ -5,7 +5,10 @@
   <p>Price: <%= number_to_currency(@product.price) %></p>
   <p>Tax: <%= number_to_currency(@product.tax) %></p>
   <p>Total: <%= number_to_currency(@product.total) %></p>
-  <p> <img src="<%= @product.image%>" width: "100%"/></p>
+
+  <% @product.images.each do |image| %>
+    <p><img src="<%= image.url %>" width: "100%"/></p>
+  <% end %>
   <p><%= @product.description %></p>
   <p>Supplied By: <%= @product.supplier.name %></p>
 <a href="/products/<%= @product.id %>/edit">Edit this Smoothie</a>

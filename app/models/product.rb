@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
   belongs_to :supplier
+  has_many :images
+  
   def sales_method
     if price < 6 
       @message = "Discount Item!" 
