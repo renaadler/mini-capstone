@@ -1,22 +1,27 @@
 class ProductsController < ApplicationController
   def index
-    sort_attributes = params[:sort_by]
-    sort_order = params[:sort_order]
-    discount = params[:discount]
-    search_terms = params[:search_terms]
-    
-    if discount 
-      @products = Product.where("price < ?", 6)
-    elsif search_terms
-      @products = Product.where("name iLIKE ?", "%" + search_terms + "%")
-    else  
-      @products = Product.all
-    end
+    if current_user
+      sort_attributes = params[:sort_by]
+      sort_order = params[:sort_order]
+      discount = params[:discount]
+      search_terms = params[:search_terms]
+      
+      if discount 
+        @products = current_user.products.where("price < ?", 6)
+      elsif search_terms
+        @products = current_user.products.where("name iLIKE ?", "%" + search_terms + "%")
+      else  
+        @products = current_user.products
+      end
 
-    if sort_attributes
-      @products = @products.order(sort_attributes => sort_order)
+      if sort_attributes
+        @products = @products.order(sort_attributes => sort_order)
+      end
+      render "index.html.erb"
+    else
+      flash[:warning] = "You need to log in to see your products."
+      redirect_to "/login"
     end
-    render "index.html.erb"
   end
 
   def new
