@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="col-md-3"></div>
+    <div class="well">
+      <div class="jumbotron">
+        <h1>This confirms your purchase of a <%= @product.name %>!</h1>
+        <p><img src="<%= @product.images.first.url %>" width: "100%"/></p>
+        <h2>Your order occured on <%= @order.created_at.strftime("%A, %B %e %Y") %>. 
+        Please check your email at <%= @current_user.email %></h2>
+      </div>
+        <h2>Your subtotal is: <%= number_to_currency@product.price %>.</h2>
+        <h2>Tax is: <%= number_to_currency@product.tax %>.</h2>
+        <h2>Your total payment is: <%= number_to_currency@product.total %>.</h2>
+    </div>
+  </div>
+</div>

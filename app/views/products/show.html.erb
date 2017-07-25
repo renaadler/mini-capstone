@@ -16,4 +16,13 @@
 <input type="submit" value="Delete Smoothie">
 <% end %>
 </div>
+<%= form_tag "/orders", method: "post" do %>
+<div class="form-group">
+  Quantity: <input type="integer" class="form-control" name="quantity">
+</div>
+<div class="form-group">
+  <input type="hidden" class="form-control" name="product_id" value="<%= @product.id%>">
+</div>
+<input type="submit" value="Buy">
+<% end %>
 <a href="/products">Back to All Products</a>
