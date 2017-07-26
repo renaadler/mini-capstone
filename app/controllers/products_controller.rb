@@ -17,6 +17,12 @@ class ProductsController < ApplicationController
       if sort_attributes
         @products = @products.order(sort_attributes => sort_order)
       end
+
+      category_name = params[:category]
+      if category_name
+        category = Category.find_by(name: category_name)
+        @products = category.products
+      end
       render "index.html.erb"
     else
       flash[:warning] = "You need to log in to see your products."
