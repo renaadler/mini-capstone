@@ -3,6 +3,8 @@ class Product < ApplicationRecord
   belongs_to :user
   has_many :images
   has_many :orders
+  has_many :category_products
+  has_many :categories, through: :category_products
   
   def sales_method
     if price < 6 

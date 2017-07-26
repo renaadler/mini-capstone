@@ -1,28 +1,27 @@
-     <div class="col-md-3"></div>
-    <div class="well">
-   <h2><%= @product.name %></h2>
-  <p class="<%= @product.sales_method_class_name %>"><%= @product.sales_method %></p>
-  <p>Price: <%= number_to_currency(@product.price) %></p>
-  <p>Tax: <%= number_to_currency(@product.tax) %></p>
-  <p>Total: <%= number_to_currency(@product.total) %></p>
-
-  <% @product.images.each do |image| %>
+<div class="col-md-3"></div>
+  <div class="well">
+    <h2><%= @product.name %></h2>
+    <p class="<%= @product.sales_method_class_name %>"><%= @product.sales_method %></p>
+    <p>Price: <%= number_to_currency(@product.price) %></p>
+    <p>Tax: <%= number_to_currency(@product.tax) %></p>
+    <p>Total: <%= number_to_currency(@product.total) %></p>
+    <% @product.images.each do |image| %>
     <p><img src="<%= image.url %>" width: "100%"/></p>
+    <% end %>
+    <p><%= @product.description %></p>
+    <p>Supplied By: <%= @product.supplier.name %></p>
+    <a href="/products/<%= @product.id %>/edit">Edit this Smoothie</a>
+    <%= form_tag "/products/#{@product.id}", method: "delete" do %>
+    <input type="submit" value="Delete Smoothie">
+    <% end %>
+  </div>
+  <%= form_tag "/orders", method: "post" do %>
+    <div class="form-group">
+      Quantity: <input type="integer" class="form-control" name="quantity">
+    </div>
+    <div class="form-group">
+      <input type="hidden" class="form-control" name="product_id" value="<%= @product.id%>">
+    </div>
+    <input type="submit" value="Buy">
   <% end %>
-  <p><%= @product.description %></p>
-  <p>Supplied By: <%= @product.supplier.name %></p>
-<a href="/products/<%= @product.id %>/edit">Edit this Smoothie</a>
-<%= form_tag "/products/#{@product.id}", method: "delete" do %>
-<input type="submit" value="Delete Smoothie">
-<% end %>
-</div>
-<%= form_tag "/orders", method: "post" do %>
-<div class="form-group">
-  Quantity: <input type="integer" class="form-control" name="quantity">
-</div>
-<div class="form-group">
-  <input type="hidden" class="form-control" name="product_id" value="<%= @product.id%>">
-</div>
-<input type="submit" value="Buy">
-<% end %>
 <a href="/products">Back to All Products</a>
