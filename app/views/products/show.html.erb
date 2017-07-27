@@ -10,13 +10,12 @@
     <% end %>
     <p><%= @product.description %></p>
     <p>Supplied By: <%= @product.supplier.name %></p>
-     Category:
-    <% @product.categories.each do |category| %>
-      <p><a href="/products?category=<%= category.name %>"><%= category.name %></a></p>
-    <% end %>
+    <div> Category:
+       <%= @product.categories.map { |category| category.name }.join(", ") %>
+    </div>
     <a href="/products/<%= @product.id %>/edit">Edit this Smoothie</a>
     <%= form_tag "/products/#{@product.id}", method: "delete" do %>
-    <input type="submit" value="Delete Smoothie">
+    <input type="submit" value="Delete Smoothie"> 
     <% end %>
   </div>
   <%= form_tag "/orders", method: "post" do %>
