@@ -26,8 +26,7 @@ class ProductsController < ApplicationController
       end
       render "index.html.erb"
     else
-      flash[:warning] = "You need to log in to see your products."
-      redirect_to "/login"
+        @products = Product.all
     end
   end
 
