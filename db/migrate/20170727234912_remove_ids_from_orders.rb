@@ -1,4 +1,4 @@
-class RemoveProductIdfromOrders < ActiveRecord::Migration[5.1]
+class RemoveIdsFromOrders < ActiveRecord::Migration[5.1]
   def change
     remove_column :orders, :product_id, :integer
     remove_column :orders, :quantity, :integer

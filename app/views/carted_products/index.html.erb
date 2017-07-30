@@ -1,0 +1,13 @@
+<h1>Checkout Screen</h1>
+<p>
+  <% @carted_products.each do |carted_product| %>
+    <div> <%= carted_product.quantity %> | <%= carted_product.product.name %></div>
+  <% end %>
+</p>
+
+<%= form_tag "/orders", method: "post" do %>
+
+<input type="submit" value="Buy Now">
+  <% end %>
+  
+<a href="/products">Back to All Products</a>

@@ -13,18 +13,22 @@
     <div> Category:
        <%= @product.categories.map { |category| category.name }.join(", ") %>
     </div>
+    <% if current_user && current_user.admin %>
     <a href="/products/<%= @product.id %>/edit">Edit this Smoothie</a>
-    <%= form_tag "/products/#{@product.id}", method: "delete" do %>
-    <input type="submit" value="Delete Smoothie"> 
-    <% end %>
+      <%= form_tag "/products/#{@product.id}", method: "delete" do %>
+      <input type="submit" value="Delete Smoothie"> 
+      <% end %>
+    <% end %>  
   </div>
-  <%= form_tag "/orders", method: "post" do %>
+    <% if current_user && current_user.admin %>
+  <%= form_tag "/carted_products", method: "post" do %>
     <div class="form-group">
       Quantity: <input type="integer" class="form-control" name="quantity">
     </div>
     <div class="form-group">
       <input type="hidden" class="form-control" name="product_id" value="<%= @product.id%>">
     </div>
-    <input type="submit" value="Buy">
+    <input type="submit" value="Add to Cart">
+  <% end %>
   <% end %>
 <a href="/products">Back to All Products</a>

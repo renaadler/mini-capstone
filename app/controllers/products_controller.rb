@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_admin!, except: [:index, :show]
   def index
     if current_user
       sort_attributes = params[:sort_by]
@@ -7,11 +8,11 @@ class ProductsController < ApplicationController
       search_terms = params[:search_terms]
       
       if discount 
-        @products = current_user.products.where("price < ?", 6)
+        @products = Product.all.where("price < ?", 6)
       elsif search_terms
-        @products = current_user.products.where("name iLIKE ?", "%" + search_terms + "%")
+        @products = Product.all.where("name iLIKE ?", "%" + search_terms + "%")
       else  
-        @products = current_user.products
+        @products = Product.all
       end
 
       if sort_attributes
@@ -35,14 +36,17 @@ class ProductsController < ApplicationController
   end
 
   def create
-    product = Product.new(
+    product = Product.create(
       name: params[:form_name],
       price: params[:form_price],
-      image: params[:form_image],
+      # image: params[:form_image],
       description: params[:form_description],
       stock: params[:true]
       )
-    product.save
+    Image.create(
+      url: params[:form_image],
+      product_id: Product.id
+      )
     flash[:success] = "Smoothie Successfully Created!"
     redirect_to "/products/#{product.id}"
   end
