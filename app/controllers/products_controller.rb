@@ -1,33 +1,32 @@
 class ProductsController < ApplicationController
   before_action :authenticate_admin!, except: [:index, :show]
   def index
-    if current_user
-      sort_attributes = params[:sort_by]
-      sort_order = params[:sort_order]
-      discount = params[:discount]
-      search_terms = params[:search_terms]
-      
-      if discount 
-        @products = Product.all.where("price < ?", 6)
-      elsif search_terms
-        @products = Product.all.where("name iLIKE ?", "%" + search_terms + "%")
-      else  
-        @products = Product.all
-      end
-
-      if sort_attributes
-        @products = @products.order(sort_attributes => sort_order)
-      end
-
-      category_name = params[:category]
-      if category_name
-        category = Category.find_by(name: category_name)
-        @products = category.products
-      end
-      render "index.html.erb"
-    else
-        @products = Product.all
+    # if current_user
+    sort_attributes = params[:sort_by]
+    sort_order = params[:sort_order]
+    discount = params[:discount]
+    search_terms = params[:search_terms]
+    
+    if discount 
+      @products = Product.all.where("price < ?", 6)
+    elsif search_terms
+      @products = Product.all.where("name iLIKE ?", "%" + search_terms + "%")
+    else  
+      @products = Product.all
     end
+
+    if sort_attributes
+      @products = @products.order(sort_attributes => sort_order)
+    end
+
+    category_name = params[:category]
+    if category_name
+      category = Category.find_by(name: category_name)
+      @products = category.products
+    end
+    @products = Product.all
+    render "index.html.erb"
+    # else
   end
 
   def new
