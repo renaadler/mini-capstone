@@ -30,23 +30,30 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @suppliers = Supplier.all
+    @product = Product.new
     render "new.html.erb"
   end
 
   def create
-    product = Product.create(
+    @product = Product.new(
       name: params[:form_name],
       price: params[:form_price],
       # image: params[:form_image],
       description: params[:form_description],
       stock: params[:true]
       )
-    Image.create(
+    if @product.save
+      Image.create(
       url: params[:form_image],
-      product_id: Product.id
+      product_id: product.id
       )
-    flash[:success] = "Smoothie Successfully Created!"
-    redirect_to "/products/#{product.id}"
+      flash[:success] = "Smoothie Successfully Created!"
+      redirect_to "/products/#{product.id}"
+    else
+      @suppliers = Supplier.all
+      render "new.html.erb"
+    end
   end
 
   def show
